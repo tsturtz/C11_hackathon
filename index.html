@@ -136,8 +136,24 @@
 
     var locations = [];
 
+    /*
+    Using the Google Maps API requires their specific instructions to call this way.  We could not use
+    AJAX normally to do it.
+
+    We use the InfoBubble library to make our popup when people click on our markers.  We assign two
+    InfoBubble, one for 'You are Here' marker and our Meetups icons.
+
+    It uses Google API eventListener to provide the base for our click handlers
+     */
+
+    /**
+     * function initMap
+     *
+     * @param myLatLng - this object is pulled from our Geocoding API function
+     * @param eventObj - this object was parsed from our parseEventsForMaps function
+     */
     function initMap(myLatLng, eventObj) {
-        console.log("Zip ", myLatLng);
+        //console.log("Zip ", myLatLng);
         if (myLatLng === undefined) {
             //console.log("undefined");
             myLatLng = { // defaults to Orange, CA
@@ -146,34 +162,23 @@
             }
         }
 
-        if (eventObj === undefined) {
+        if (eventObj === undefined) { // set a default location so the initial map doesn't bugged out.
             locations = [
                 {lat: 33.81, lng: -117.845692},
                 {lat: 33.92, lng: -117.853218},
-                {lat: 33.73, lng: -117.845694},
-                {lat: 33.94, lng: -117.849506},
-                {lat: 33.75, lng: -117.851315},
-                {lat: 33.86, lng: -117.848000},
-                {lat: 33.87, lng: -117.853352}
             ]
         } else {
             locations = eventObj;
         }
 
-        //console.log('global venue is ',global_venue);
 
-        console.log('param locations is ', eventObj);
-        //var locations2 = eventObj;
+        //console.log('param locations is ', eventObj);
 
 
-        // In the following example, markers appear when the user clicks on the map.
-        // Each marker is labeled with a single alphabetical character.
         var labels = [];
-        //console.log("global labels is ", labels);
         labels = global_venue;
-        //console.log("global venue is ", global_venue);
-        //labels.unshift("You are here");
-        console.log('global venue is ', labels);
+
+        //console.log('global venue is ', labels);
         var labelIndex = 0;
 
         var map = new google.maps.Map(document.getElementById('map'), {
