@@ -361,10 +361,10 @@ $('#map_left').on('click','.card', function(){
 
 function missingPropertyValues(objName) {
     for(var i=0 in event) {
-        console.log()
+        console.log();
         console.log(objName[i]);
     }
-}
+};
 
 
 //API IS BEING THROTTLED FUNCTION
